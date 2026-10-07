@@ -3,7 +3,8 @@
     "version": "1.0.0",
     "dependencies": {
         "@adobe/aio-commerce-lib-app": "^2.0.0",
-        "@adobe/aio-commerce-sdk": "^2.0.0"
+        "@adobe/aio-commerce-sdk": "^2.0.0",
+        "@adobe/aio-sdk": "^6.0.0"
     },
     "description": "A custom Adobe Commerce application. Fill description for your app.",
     "imports": {
