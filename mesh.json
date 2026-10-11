@@ -12,7 +12,7 @@
               "Magento-Website-Code": "base",
               "Magento-Store-Code": "main_website_store",
               "Magento-Store-View-Code": "default",
-              "Magento-Customer-Group": "<customer-group-code>"
+              "Magento-Customer-Group": "356a192b7913b04c54574d18c28d46e6395428ab"
             },
             "schemaHeaders": {
               "Magento-Environment-Id": "GDbf17KFa7aoKXRdZK76fd"
