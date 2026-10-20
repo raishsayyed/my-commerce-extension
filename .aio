@@ -142,7 +142,90 @@
         "events": {
           "registrations": []
         },
-        "mesh": {}
+        "mesh": {
+          "lastUpdated": "2026-10-11T17:49:24.594Z",
+          "meshConfig": {
+            "sources": [
+              {
+                "name": "Commerce",
+                "handler": {
+                  "graphql": {
+                    "endpoint": "https://na1-sandbox.api.commerce.adobe.com/GDbf17KFa7aoKXRdZK76fd/graphql",
+                    "operationHeaders": {
+                      "Content-Type": "application/json",
+                      "Magento-Environment-Id": "GDbf17KFa7aoKXRdZK76fd",
+                      "Magento-Website-Code": "base",
+                      "Magento-Store-Code": "main_website_store",
+                      "Magento-Store-View-Code": "default",
+                      "Magento-Customer-Group": "356a192b7913b04c54574d18c28d46e6395428ab"
+                    },
+                    "schemaHeaders": {
+                      "Magento-Environment-Id": "GDbf17KFa7aoKXRdZK76fd"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "Enrichment",
+                "handler": {
+                  "openapi": {
+                    "source": "./enrichment-openapi.json"
+                  }
+                },
+                "transforms": [
+                  {
+                    "prefix": {
+                      "value": "Enrichment_",
+                      "includeRootOperations": true
+                    }
+                  }
+                ]
+              }
+            ],
+            "files": [
+              {
+                "path": "./enrichment-openapi.json",
+                "content": "{\"openapi\":\"3.0.0\",\"info\":{\"title\":\"Product Enrichment API\",\"version\":\"1.0.0\",\"description\":\"Custom product enrichment service via I/O Runtime\"},\"servers\":[{\"url\":\"https://3967933-888beigetuna-stage.adobeioruntime.net/api/v1/web/course-labs\"}],\"paths\":{\"/product-enrichment\":{\"get\":{\"operationId\":\"getProductEnrichment\",\"summary\":\"Get enriched product data\",\"parameters\":[{\"name\":\"sku\",\"in\":\"query\",\"required\":true,\"schema\":{\"type\":\"string\"},\"description\":\"The product SKU to enrich\"}],\"responses\":{\"200\":{\"description\":\"Enriched product data\",\"content\":{\"application/json\":{\"schema\":{\"type\":\"object\",\"properties\":{\"sku\":{\"type\":\"string\"},\"name\":{\"type\":\"string\"},\"price\":{\"type\":\"number\"},\"sustainabilityScore\":{\"type\":\"integer\"},\"estimatedDelivery\":{\"type\":\"string\"},\"enrichedAt\":{\"type\":\"string\"}}}}}}}}}}}"
+              }
+            ]
+          },
+          "meshId": "284692ba-7bcf-4f07-89a0-c0132934676c",
+          "lastUpdatedBy": {
+            "firstName": "MOHAMMEDRAISH",
+            "lastName": "SAYYED",
+            "userEmail": "mohammedraish.sayyed@cognizant.com",
+            "userId": "075383766AA8688F0A495C68@ae0c22e46912288d495fd5.e",
+            "displayName": "MOHAMMEDRAISH SAYYED"
+          },
+          "createdBy": {
+            "firstName": "MOHAMMEDRAISH",
+            "lastName": "SAYYED",
+            "userEmail": "mohammedraish.sayyed@cognizant.com",
+            "userId": "075383766AA8688F0A495C68@ae0c22e46912288d495fd5.e",
+            "displayName": "MOHAMMEDRAISH SAYYED"
+          },
+          "createdOn": "2026-10-08T04:45:05.956Z",
+          "orgName": "CommerceCohort",
+          "projectName": "Commerce OOP Project MohammedRaishSayyed",
+          "workspaceName": "Stage",
+          "meshStatus": "success",
+          "configId": "149f4c0f9e368367a015233bc7a7d64bbb32cacdeaeebeb72fa26b2289ab0e2e"
+        }
+      },
+      "endpoints": {
+        "commerce/extensibility/1": {
+          "workerProcess": [
+            {
+              "href": "https://3967933-888beigetuna-stage.adobeioruntime.net/api/v1/web/app-management/app-config"
+            },
+            {
+              "href": "https://3967933-888beigetuna-stage.adobeioruntime.net/api/v1/web/app-management/association"
+            },
+            {
+              "href": "https://3967933-888beigetuna-stage.adobeioruntime.net/api/v1/web/app-management/installation"
+            }
+          ]
+        }
       }
     }
   }

@@ -215626,10 +215626,11 @@ async function main (params) {
     logger.info(`Fetching product data for SKU: ${sku}`);
 
     const baseUrl = params.COMMERCE_API_BASE_URL.replace(/\/$/, '');
+    //logger.info(`Using Commerce API base URL: ${baseUrl}`);
     const accessToken = await getImsAccessToken(params);
-
+    //logger.info(`Obtained IMS access token ${accessToken}...`);
     const productUrl = `${baseUrl}/V1/products/${encodeURIComponent(sku)}`;
-
+    logger.info(`Fetching product data from: ${productUrl}`);
     const response = await fetch(productUrl, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -215638,7 +215639,7 @@ async function main (params) {
         'Content-Type': 'application/json',
       },
     });
-
+    logger.info(`Response: ${response.ok}, Status: ${response.status}, Status Text: ${response.statusText}`);
     if (!response.ok) {
       logger.error(`Commerce API returned ${response.status}`);
       return {
@@ -215646,7 +215647,7 @@ async function main (params) {
         body: { error: `Commerce API error: ${response.statusText}` },
       };
     }
-
+    
     const product = await response.json();
 
     const enrichedProduct = {
