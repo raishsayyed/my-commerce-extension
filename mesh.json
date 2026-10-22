@@ -36,6 +36,30 @@
           }
         ]
       }
-    ]
+    ],
+    "responseConfig": {
+      "CORS": {
+        "origin": [
+          "http://localhost:3000",
+          "https://main--my-commerce-storefront--raishsayyed.aem.live"
+        ],
+        "methods": [
+          "GET",
+          "POST",
+          "PUT",
+          "HEAD",
+          "OPTIONS"
+        ],
+        "headers": [
+          "Content-Type",
+          "Authorization",
+          "X-Requested-With",
+          "Magento-Environment-Id",
+          "Store"
+        ],
+        "credentials": true,
+        "maxAge": 86400
+      }
+    }
   }
 }
