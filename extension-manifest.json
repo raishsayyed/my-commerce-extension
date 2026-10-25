@@ -1,0 +1,8 @@
+{
+  "name": "order_enrichment_admin",
+  "displayName": "Order enrichment admin",
+  "description": "ADLS Week 5 Admin UI lab",
+  "platform": "web",
+  "id": "order_enrichment_admin",
+  "version": "1.0.0"
+}
