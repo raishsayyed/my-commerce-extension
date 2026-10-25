@@ -1,13 +1,14 @@
 {
-  "course-labs/product-enrichment": "d71fe50c624db4cfdc086212ae7ace3e66f842c4bd9d0abda17d9206f752e06b",
-  "app-management/__secured_app-config": "fe40513252eec2f1e8e4f98d7437b47f8cb571f9d6ea574545b3ab91f3023999",
-  "app-management/__secured_association": "2587f6481c9bc92c4e539ca6d65f2584621b269ce63f0ec94f687cadca046046",
-  "app-management/__secured_installation": "2d73751cc823f5c0540f350c29d86fa778ea28e51b17a9022e3c6e1dd3a01445",
+  "course-labs/product-enrichment": "bbe5b4b97c9c8b9dc599163d9f8ac5f2b8976dee425495ea91f127e7bea2235e",
+  "app-management/__secured_app-config": "5ad4a394bc1f864f421d292043187dcbd9d0d809d4cdab244388b3eeac99add2",
+  "app-management/__secured_association": "697ef4d84787089c63c33e5ce50f3e24759ab0503512c4bfbb29c8005bd0e909",
+  "app-management/__secured_installation": "eae6bdcd1068f1b0c5424395c5a43778ea5917628ae2e82dc62748d88c31b039",
   "app-management/app-config": "1aae1338af86a359e226fa6c6b13633b7f0997d13769273107249fcccabee339",
   "app-management/association": "131a3d58aa1d4ba35a47a52189555b6d0fedc899ed8c68bfcb66df1e8ed100ea",
   "app-management/installation": "8872f3be8ba106e10f4042c0df6a6d3d03a0d1a85f08e292dc8f8d68715ac868",
-  "course-labs/order-event-consumer": "20d152a95835e610f4c5cf923afc519607bfb68a56a76aa18d30b9f0602734d8",
-  "course-labs/validate-product": "2dab96a51006faefb754004204bd05df7cab78158e8c1d6f597e996288decafc",
+  "course-labs/order-event-consumer": "233b6e6f480e2bdbe234fafe930d9db5e3f678c4288a79f09b6700e281c9b42e",
+  "course-labs/validate-product": "790eb3796526d8a6ffda5b2ac4717d3263d7c82d1214d8dd2877b90262bff2e6",
   "admin-ui-sdk/__secured_registration": "7e13ed3269c48865ef1bfff6fd2e5b170d41ec8eabf55ff112acf08d4ac39e7a",
-  "admin-ui-sdk/registration": "6a4c697a36382a9a45013eb233350752f0da1d3a08d93eeac35b812d0549c765"
+  "admin-ui-sdk/registration": "6a4c697a36382a9a45013eb233350752f0da1d3a08d93eeac35b812d0549c765",
+  "course-labs/get-enriched-orders": "80318c3c0bb9e06f472f61a5e613bbcbb49f4c668aa4499ce0cbc56fb917e1f0"
 }

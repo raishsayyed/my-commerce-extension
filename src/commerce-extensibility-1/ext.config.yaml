@@ -66,6 +66,18 @@ runtimeManifest:
           annotations:
             require-adobe-auth: false
             final: true
+        get-enriched-orders:
+          function: actions/labs/get-enriched-orders/index.js
+          web: 'yes'
+          runtime: nodejs:22
+          inputs:
+            LOG_LEVEL: debug
+          limits:
+            timeout: 30000
+            memorySize: 256
+          annotations:
+            require-adobe-auth: false
+            final: true
     app-management:
       license: Apache-2.0
       actions:
