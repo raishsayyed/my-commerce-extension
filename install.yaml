@@ -10,4 +10,4 @@ extensions:
   - extensionPointId: commerce/configuration/1
   # This extension is required for app management. Do not remove.
   - extensionPointId: commerce/extensibility/1
-  - extensionPointId: commerce/backend-ui/1
+  - extensionPointId: commerce/backend-ui/2
