@@ -1,9 +1,11 @@
 {
-  "course-labs/product-enrichment": "82307138cdf1f9523360cbe50ecec960346618e17db839144280cec0132c3f84",
-  "app-management/__secured_app-config": "1ea035b80c20f180433cfcdf88fc94a9cde7f3fb03ed756bc5b67546dbfdbd06",
-  "app-management/__secured_association": "e9d559c2dfedeac1ca981e6d1a5ddb0af006c5a5e4c6c27d33be7d67df85ed52",
-  "app-management/__secured_installation": "fdd52825e035b06982f9605d67633d2baa24c28774826a23c4e7b230f0f39ef9",
+  "course-labs/product-enrichment": "9a2accdd32831591fe8dde60081b1566297bd13346a15b39109ce84a3f4245de",
+  "app-management/__secured_app-config": "a15db8b5fb42e590240ded66cfd251585ca01da739d0cd5004eb9d4ade62266b",
+  "app-management/__secured_association": "fa8838886205c518d1754cb5a6b80b067f090c05ea265c3e07c6b0a1e525c807",
+  "app-management/__secured_installation": "b8aa53011207fe7326dbe650b7ef48154498a76cb19cb7d712063f8394f57854",
   "app-management/app-config": "1aae1338af86a359e226fa6c6b13633b7f0997d13769273107249fcccabee339",
   "app-management/association": "131a3d58aa1d4ba35a47a52189555b6d0fedc899ed8c68bfcb66df1e8ed100ea",
-  "app-management/installation": "8872f3be8ba106e10f4042c0df6a6d3d03a0d1a85f08e292dc8f8d68715ac868"
+  "app-management/installation": "8872f3be8ba106e10f4042c0df6a6d3d03a0d1a85f08e292dc8f8d68715ac868",
+  "course-labs/order-event-consumer": "5e1def4ecddf8517b05ef826b6c029b589d0434a55739ac4fd73957d2d1e826b",
+  "course-labs/validate-product": "3e29ab8fb42419e5008a009c4905e306c138e1d705a6691cc02c5ee4559f04c6"
 }

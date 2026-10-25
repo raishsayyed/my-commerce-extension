@@ -69,14 +69,45 @@ async function main (params) {
   const logger = Core.Logger('product-enrichment', {
     level: params.LOG_LEVEL || 'info',
   });
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Cache-Control': 'no-store',
+    'Content-Type': 'application/json',
+  };
 
   try {
-    const { sku } = params;
+    const method = String(params.__ow_method || 'get').toUpperCase();
+    if (method === 'OPTIONS') {
+      return { statusCode: 204, headers, body: '' };
+    }
+    if (method !== 'GET') {
+      return {
+        statusCode: 405,
+        headers: { ...headers, Allow: 'GET, OPTIONS' },
+        body: { error: 'Method not allowed' },
+      };
+    }
+
+    const sku = params.sku || params.__ow_query?.sku;
     if (!sku) {
       return {
         statusCode: 400,
+        headers,
         body: { error: 'Missing required parameter: sku' },
       };
+    }
+
+    const requiredParams = [
+      'COMMERCE_API_BASE_URL',
+      'IMS_OAUTH_S2S_CLIENT_ID',
+      'IMS_OAUTH_S2S_CLIENT_SECRET',
+      'IMS_OAUTH_S2S_ORG_ID',
+    ];
+    const missingParams = requiredParams.filter((key) => !params[key]);
+    if (missingParams.length) {
+      throw new Error(`Missing required configuration: ${missingParams.join(', ')}`);
     }
 
     logger.info(`Fetching product data for SKU: ${sku}`);
@@ -100,6 +131,7 @@ async function main (params) {
       logger.error(`Commerce API returned ${response.status}`);
       return {
         statusCode: response.status,
+        headers,
         body: { error: `Commerce API error: ${response.statusText}` },
       };
     }
@@ -119,12 +151,14 @@ async function main (params) {
 
     return {
       statusCode: 200,
+      headers,
       body: enrichedProduct,
     };
   } catch (error) {
     logger.error('Action failed:', error.message);
     return {
       statusCode: 500,
+      headers,
       body: { error: 'Internal server error' },
     };
   }

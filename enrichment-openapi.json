@@ -3,7 +3,7 @@
   "info": {
     "title": "Product Enrichment API",
     "version": "1.0.0",
-    "description": "Custom product enrichment service via I/O Runtime"
+    "description": "Product data, including the current saved Commerce price, for EDS storefronts via I/O Runtime."
   },
   "servers": [
     {
@@ -14,7 +14,8 @@
     "/product-enrichment": {
       "get": {
         "operationId": "getProductEnrichment",
-        "summary": "Get enriched product data",
+        "summary": "Get product data and current price",
+        "description": "Fetches the product by SKU from Adobe Commerce when called. Use this from the EDS storefront to display the latest saved price.",
         "parameters": [
           {
             "name": "sku",
@@ -44,6 +45,14 @@
                 }
               }
             }
+          }
+        }
+      },
+      "options": {
+        "summary": "CORS preflight",
+        "responses": {
+          "204": {
+            "description": "CORS preflight accepted"
           }
         }
       }
