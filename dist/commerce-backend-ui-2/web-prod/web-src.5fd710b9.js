@@ -57668,40 +57668,289 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MainPage", function() {
     return MainPage;
 });
-var _welcomeJsx = require("#web/components/welcome.jsx");
-/** Entrypoint for the main page of the app. */ var _jsxRuntime = require("react/jsx-runtime");
-function MainPage() {
-    return /*#__PURE__*/ (0, _jsxRuntime.jsx)("main", {
-        children: /*#__PURE__*/ (0, _jsxRuntime.jsx)((0, _welcomeJsx.Welcome), {})
-    });
-}
-
-},{"#web/components/welcome.jsx":"5SsZO","react/jsx-runtime":"7CLuA","@parcel/transformer-js/src/esmodule-helpers.js":"lQwrv"}],"5SsZO":[function(require,module,exports,__globalThis) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "Welcome", function() {
-    return Welcome;
-});
+var _asyncToGenerator = require("@swc/helpers/_/_async_to_generator");
+var _slicedToArray = require("@swc/helpers/_/_sliced_to_array");
+var _tsGenerator = require("@swc/helpers/_/_ts_generator");
+var _react = require("react");
 var _web = require("@adobe/aio-commerce-lib-admin-ui/web");
-/** A simple welcome component that displays the IMS token and org ID. */ var _jsxRuntime = require("react/jsx-runtime");
-function Welcome() {
-    var _useIms = (0, _web.useIms)(), data = _useIms.data, error = _useIms.error;
-    if (error) throw error;
-    return /*#__PURE__*/ (0, _jsxRuntime.jsxs)((0, _jsxRuntime.Fragment), {
+var _jsxRuntime = require("react/jsx-runtime");
+var ACTION_URL = "https://3967933-888beigetuna-stage.adobeioruntime.net/api/v1/web/course-labs/get-enriched-orders";
+function formatAmount(value) {
+    var amount = Number(value);
+    return Number.isFinite(amount) ? amount.toFixed(2) : "0.00";
+}
+function formatDate(value) {
+    if (!value) return "\u2014";
+    var date = new Date(value);
+    return Number.isNaN(date.getTime()) ? "\u2014" : date.toLocaleString();
+}
+function MainPage() {
+    var _useIms = (0, _web.useIms)(), data = _useIms.data, imsError = _useIms.error;
+    var imsToken = data === null || data === void 0 ? void 0 : data.imsToken;
+    var _useState = (0, _slicedToArray._)((0, _react.useState)([]), 2), orders = _useState[0], setOrders = _useState[1];
+    var _useState1 = (0, _slicedToArray._)((0, _react.useState)(null), 2), summary = _useState1[0], setSummary = _useState1[1];
+    var _useState2 = (0, _slicedToArray._)((0, _react.useState)(true), 2), loading = _useState2[0], setLoading = _useState2[1];
+    var _useState3 = (0, _slicedToArray._)((0, _react.useState)(null), 2), error = _useState3[0], setError = _useState3[1];
+    var _useState4 = (0, _slicedToArray._)((0, _react.useState)(0), 2), refreshKey = _useState4[0], setRefreshKey = _useState4[1];
+    (0, _react.useEffect)(function() {
+        if (imsError || !imsToken) {
+            setLoading(false);
+            return undefined;
+        }
+        var controller = new AbortController();
+        var active = true;
+        function fetchOrders() {
+            return (/*#__PURE__*/ 0, /*#__PURE__*/ _asyncToGenerator._)(function() {
+                var response, result, fetchError;
+                return (0, _tsGenerator._)(this, function(_state) {
+                    switch(_state.label){
+                        case 0:
+                            setLoading(true);
+                            setError(null);
+                            _state.label = 1;
+                        case 1:
+                            _state.trys.push([
+                                1,
+                                4,
+                                5,
+                                6
+                            ]);
+                            return [
+                                4,
+                                fetch(ACTION_URL, {
+                                    headers: {
+                                        Authorization: "Bearer ".concat(imsToken),
+                                        "Content-Type": "application/json"
+                                    },
+                                    signal: controller.signal
+                                })
+                            ];
+                        case 2:
+                            response = _state.sent();
+                            if (!response.ok) throw new Error("Could not load enriched orders (HTTP ".concat(response.status, ")."));
+                            return [
+                                4,
+                                response.json()
+                            ];
+                        case 3:
+                            result = _state.sent();
+                            if (!Array.isArray(result.orders)) throw new Error("The enriched orders service returned an invalid response.");
+                            if (active) {
+                                setOrders(result.orders);
+                                setSummary(result.summary || null);
+                            }
+                            return [
+                                3,
+                                6
+                            ];
+                        case 4:
+                            fetchError = _state.sent();
+                            if (active && fetchError.name !== "AbortError") setError(fetchError.message || "Could not load enriched orders.");
+                            return [
+                                3,
+                                6
+                            ];
+                        case 5:
+                            if (active) setLoading(false);
+                            return [
+                                7
+                            ];
+                        case 6:
+                            return [
+                                2
+                            ];
+                    }
+                });
+            })();
+        }
+        fetchOrders();
+        return function() {
+            active = false;
+            controller.abort();
+        };
+    }, [
+        imsToken,
+        imsError,
+        refreshKey
+    ]);
+    var message = (imsError === null || imsError === void 0 ? void 0 : imsError.message) || error;
+    var _summary_totalOrders, _summary_highValueCount;
+    return /*#__PURE__*/ (0, _jsxRuntime.jsxs)("main", {
+        className: "orders-dashboard",
         children: [
-            /*#__PURE__*/ (0, _jsxRuntime.jsx)("h1", {
-                children: "Welcome to your Adobe Commerce App"
-            }),
-            /*#__PURE__*/ (0, _jsxRuntime.jsxs)("p", {
+            /*#__PURE__*/ (0, _jsxRuntime.jsxs)("header", {
+                className: "dashboard-header",
                 children: [
-                    "Your IMS Org ID is ",
-                    data.imsOrgId
+                    /*#__PURE__*/ (0, _jsxRuntime.jsxs)("div", {
+                        children: [
+                            /*#__PURE__*/ (0, _jsxRuntime.jsx)("h1", {
+                                children: "Enriched Orders Dashboard"
+                            }),
+                            /*#__PURE__*/ (0, _jsxRuntime.jsx)("p", {
+                                children: "Order enrichment data from your Commerce instance."
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, _jsxRuntime.jsx)("button", {
+                        className: "refresh-button",
+                        disabled: loading || Boolean(imsError),
+                        onClick: function() {
+                            return setRefreshKey(function(key) {
+                                return key + 1;
+                            });
+                        },
+                        type: "button",
+                        children: "Refresh"
+                    })
+                ]
+            }),
+            loading ? /*#__PURE__*/ (0, _jsxRuntime.jsx)("p", {
+                "aria-live": "polite",
+                role: "status",
+                children: "Loading enriched orders\u2026"
+            }) : message ? /*#__PURE__*/ (0, _jsxRuntime.jsxs)("section", {
+                "aria-live": "polite",
+                className: "dashboard-message dashboard-error",
+                children: [
+                    /*#__PURE__*/ (0, _jsxRuntime.jsx)("h2", {
+                        children: "Unable to load orders"
+                    }),
+                    /*#__PURE__*/ (0, _jsxRuntime.jsx)("p", {
+                        children: message
+                    })
+                ]
+            }) : /*#__PURE__*/ (0, _jsxRuntime.jsxs)((0, _jsxRuntime.Fragment), {
+                children: [
+                    summary && /*#__PURE__*/ (0, _jsxRuntime.jsxs)("section", {
+                        "aria-label": "Order summary",
+                        className: "summary-cards",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxRuntime.jsxs)("article", {
+                                className: "summary-card",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxRuntime.jsx)("h2", {
+                                        children: "Total Orders"
+                                    }),
+                                    /*#__PURE__*/ (0, _jsxRuntime.jsx)("p", {
+                                        children: (_summary_totalOrders = summary.totalOrders) !== null && _summary_totalOrders !== void 0 ? _summary_totalOrders : orders.length
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ (0, _jsxRuntime.jsxs)("article", {
+                                className: "summary-card",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxRuntime.jsx)("h2", {
+                                        children: "Total Revenue"
+                                    }),
+                                    /*#__PURE__*/ (0, _jsxRuntime.jsxs)("p", {
+                                        children: [
+                                            "$",
+                                            formatAmount(summary.totalRevenue)
+                                        ]
+                                    })
+                                ]
+                            }),
+                            /*#__PURE__*/ (0, _jsxRuntime.jsxs)("article", {
+                                className: "summary-card",
+                                children: [
+                                    /*#__PURE__*/ (0, _jsxRuntime.jsx)("h2", {
+                                        children: "High Value Orders"
+                                    }),
+                                    /*#__PURE__*/ (0, _jsxRuntime.jsx)("p", {
+                                        children: (_summary_highValueCount = summary.highValueCount) !== null && _summary_highValueCount !== void 0 ? _summary_highValueCount : 0
+                                    })
+                                ]
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ (0, _jsxRuntime.jsxs)("section", {
+                        "aria-labelledby": "processed-orders-heading",
+                        children: [
+                            /*#__PURE__*/ (0, _jsxRuntime.jsx)("h2", {
+                                id: "processed-orders-heading",
+                                children: "Processed Orders"
+                            }),
+                            orders.length === 0 ? /*#__PURE__*/ (0, _jsxRuntime.jsx)("p", {
+                                className: "dashboard-message",
+                                children: "No enriched orders yet. Create orders in Commerce to generate event data."
+                            }) : /*#__PURE__*/ (0, _jsxRuntime.jsx)("div", {
+                                className: "orders-table-wrap",
+                                children: /*#__PURE__*/ (0, _jsxRuntime.jsxs)("table", {
+                                    className: "orders-table",
+                                    children: [
+                                        /*#__PURE__*/ (0, _jsxRuntime.jsx)("thead", {
+                                            children: /*#__PURE__*/ (0, _jsxRuntime.jsxs)("tr", {
+                                                children: [
+                                                    /*#__PURE__*/ (0, _jsxRuntime.jsx)("th", {
+                                                        scope: "col",
+                                                        children: "Order #"
+                                                    }),
+                                                    /*#__PURE__*/ (0, _jsxRuntime.jsx)("th", {
+                                                        scope: "col",
+                                                        children: "Status"
+                                                    }),
+                                                    /*#__PURE__*/ (0, _jsxRuntime.jsx)("th", {
+                                                        scope: "col",
+                                                        children: "Total"
+                                                    }),
+                                                    /*#__PURE__*/ (0, _jsxRuntime.jsx)("th", {
+                                                        scope: "col",
+                                                        children: "Tier"
+                                                    }),
+                                                    /*#__PURE__*/ (0, _jsxRuntime.jsx)("th", {
+                                                        scope: "col",
+                                                        children: "Items"
+                                                    }),
+                                                    /*#__PURE__*/ (0, _jsxRuntime.jsx)("th", {
+                                                        scope: "col",
+                                                        children: "Processed"
+                                                    })
+                                                ]
+                                            })
+                                        }),
+                                        /*#__PURE__*/ (0, _jsxRuntime.jsx)("tbody", {
+                                            children: orders.map(function(order) {
+                                                var _order_enrichment, _order_enrichment_itemSummary, _order_enrichment1;
+                                                var _order_enrichment_itemSummary_length;
+                                                return /*#__PURE__*/ (0, _jsxRuntime.jsxs)("tr", {
+                                                    children: [
+                                                        /*#__PURE__*/ (0, _jsxRuntime.jsx)("td", {
+                                                            children: order.incrementId || order.orderId || "\u2014"
+                                                        }),
+                                                        /*#__PURE__*/ (0, _jsxRuntime.jsx)("td", {
+                                                            children: order.status || "\u2014"
+                                                        }),
+                                                        /*#__PURE__*/ (0, _jsxRuntime.jsxs)("td", {
+                                                            children: [
+                                                                order.currency || "",
+                                                                " ",
+                                                                formatAmount(order.grandTotal)
+                                                            ]
+                                                        }),
+                                                        /*#__PURE__*/ (0, _jsxRuntime.jsx)("td", {
+                                                            children: ((_order_enrichment = order.enrichment) === null || _order_enrichment === void 0 ? void 0 : _order_enrichment.orderTier) || "\u2014"
+                                                        }),
+                                                        /*#__PURE__*/ (0, _jsxRuntime.jsx)("td", {
+                                                            children: (_order_enrichment_itemSummary_length = (_order_enrichment1 = order.enrichment) === null || _order_enrichment1 === void 0 ? void 0 : (_order_enrichment_itemSummary = _order_enrichment1.itemSummary) === null || _order_enrichment_itemSummary === void 0 ? void 0 : _order_enrichment_itemSummary.length) !== null && _order_enrichment_itemSummary_length !== void 0 ? _order_enrichment_itemSummary_length : 0
+                                                        }),
+                                                        /*#__PURE__*/ (0, _jsxRuntime.jsx)("td", {
+                                                            children: formatDate(order.processedAt)
+                                                        })
+                                                    ]
+                                                }, order.orderId || order.incrementId);
+                                            })
+                                        })
+                                    ]
+                                })
+                            })
+                        ]
+                    })
                 ]
             })
         ]
     });
 }
 
-},{"@adobe/aio-commerce-lib-admin-ui/web":"02fWC","react/jsx-runtime":"7CLuA","@parcel/transformer-js/src/esmodule-helpers.js":"lQwrv"}]},["1kTTj"], "1kTTj", "parcelRequirec253", {})
+},{"@swc/helpers/_/_async_to_generator":"bjK9x","@swc/helpers/_/_sliced_to_array":"5WKJ8","@swc/helpers/_/_ts_generator":"lb4Wh","react":"eX4i0","@adobe/aio-commerce-lib-admin-ui/web":"02fWC","react/jsx-runtime":"7CLuA","@parcel/transformer-js/src/esmodule-helpers.js":"lQwrv"}]},["1kTTj"], "1kTTj", "parcelRequirec253", {})
 
-//# sourceMappingURL=web-src.8297dfc8.js.map
+//# sourceMappingURL=web-src.5fd710b9.js.map
